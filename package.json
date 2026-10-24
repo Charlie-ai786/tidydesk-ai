@@ -1,0 +1,84 @@
+{
+  "name": "tidydesk-ai",
+  "version": "1.0.0",
+  "description": "Privacy-first AI file organizer — Hacktoberfest Week 3",
+  "private": true,
+  "author": "TidyDesk AI Contributors",
+  "license": "MIT",
+  "homepage": "https://github.com/your-org/tidydesk-ai",
+  "main": "electron-dist/main.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev:vite": "vite",
+    "dev:electron": "cross-env NODE_ENV=development electron .",
+    "dev": "concurrently -n VITE,ELECTRON -c cyan,yellow \"npm run dev:vite\" \"wait-on http://localhost:5173 && npm run dev:electron\"",
+    "build:vite": "vite build",
+    "build:electron": "tsc -p tsconfig.electron.json",
+    "build": "npm run build:vite && npm run build:electron",
+    "package": "npm run build && electron-builder",
+    "test": "vitest run",
+    "test:ui": "vitest --ui",
+    "test:watch": "vitest",
+    "lint": "oxlint src/"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "electron-is-dev": "^3.0.1",
+    "immer": "^11.2.9",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "uuid": "^14.0.3",
+    "zustand": "^5.0.16"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.20",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.8",
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/node": "^24.19.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/uuid": "^10.0.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "@vitest/ui": "^5.0.5",
+    "autoprefixer": "^10.6.1",
+    "concurrently": "^10.0.6",
+    "cross-env": "^10.1.0",
+    "electron": "^45.0.0",
+    "electron-builder": "^26.18.0",
+    "jsdom": "^29.1.1",
+    "oxlint": "^1.88.0",
+    "postcss": "^8.5.31",
+    "tailwindcss": "^3.4.19",
+    "typescript": "~6.0.3",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.5",
+    "wait-on": "^9.5.1"
+  },
+  "build": {
+    "appId": "ai.tidydesk.app",
+    "productName": "TidyDesk AI",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "electron-dist/**/*",
+      "dist/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "public/tidydesk-icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "public/tidydesk-icon.icns"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "public/tidydesk-icon.png"
+    }
+  }
+}
